@@ -7,3 +7,4 @@ All build files end up in `cmake-build-debug/` (which is .gitignored), so `speed
 - [ ] Valgrind
 
 
+test sign veriff
