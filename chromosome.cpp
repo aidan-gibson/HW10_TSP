@@ -47,14 +47,29 @@ void Chromosome::mutate()
 //////////////////////////////////////////////////////////////////////////////
 // Return a pair of offsprings by recombining with another chromosome
 // Note: this method allocates memory for the new offsprings
+// ordered crossover, where a random consecutive subset is copied from one parent to the child, and the rest of the cities are copied from the other parent in the original order
 pair<Chromosome*, Chromosome*> Chromosome::recombine(const Chromosome* other)
 {
     assert(is_valid());
     assert(other->is_valid());
 
-    pair<Chromosome*, Chromosome*> x;
-    return x;
-    // Add your implementation here
+    generator_.seed(chrono::system_clock::now().time_since_epoch().count()); //using current time as seed
+    unsigned int a = generator_()%order_.size();
+    unsigned int b = generator_()%order_.size();
+    while (a == b){ // ensures they are diff values
+        b = generator_()%order_.size();
+    }
+    auto child_a = create_crossover_child(this, other, min(a, b), max(a, b));
+
+    unsigned int c = generator_()%order_.size();
+    unsigned int d = generator_()%order_.size();
+    while (c == d){ // ensures they are diff values
+        d = generator_()%order_.size();
+    }
+    auto child_b = create_crossover_child(other, this, min(c, d), max(c, d));
+
+    return {child_a,child_b};
+
 }
 
 //////////////////////////////////////////////////////////////////////////////
