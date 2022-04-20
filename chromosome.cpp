@@ -8,6 +8,7 @@
 
 #include "chromosome.h"
 
+using namespace std;
 //////////////////////////////////////////////////////////////////////////////
 // Generate a completely random permutation from a list of cities
 Chromosome::Chromosome(const Cities* cities_ptr)
@@ -38,12 +39,13 @@ Chromosome::mutate()
 //////////////////////////////////////////////////////////////////////////////
 // Return a pair of offsprings by recombining with another chromosome
 // Note: this method allocates memory for the new offsprings
-std::pair<Chromosome*, Chromosome*>
-Chromosome::recombine(const Chromosome* other)
+pair<Chromosome*, Chromosome*> Chromosome::recombine(const Chromosome* other)
 {
     assert(is_valid());
     assert(other->is_valid());
 
+    pair<Chromosome*, Chromosome*> x;
+    return x;
     // Add your implementation here
 }
 
@@ -81,25 +83,52 @@ Chromosome::create_crossover_child(const Chromosome* p1, const Chromosome* p2,
 
 // Return a positive fitness value, with higher numbers representing
 // fitter solutions (shorter total-city traversal path).
-double
-Chromosome::get_fitness() const
+double Chromosome::get_fitness() const
 {
+    return 0.0;
     // Add your implementation here
 }
 
 // A chromsome is valid if it has no repeated values in its permutation,
 // as well as no indices above the range (length) of the chromosome.
-bool
-Chromosome::is_valid() const
+bool Chromosome::is_valid() const
 {
-    // Add your implementation here
+    // order_ is permutation_t, like {0,1,2,3,4} (std::vector<unsigned int>)
+    // no repeated values.
+    // within range
+    //ultimately you're going off of a list, checking em off, and it's always 0->(range-1)
+
+    //(copy the vector) then sort it (u dont wanna modify the orig perm)
+    Cities::permutation_t sorted_order_;
+    copy(order_.begin(), order_.end(), back_inserter(sorted_order_)); //creates a sorted copy of order_ sorted_order_
+
+    //check if they're all in range by checking top and bottom of sorted
+    if (sorted_order_.front()!=0){
+        return false; //false if the first elem isn't 0
+    }
+    if (sorted_order_.back()!=(sorted_order_.size()-1)){
+        return false; //false if last elem isn't size-1
+    }
+    //check for duplicates ez cuz sorted
+    for (unsigned int i=0; i<sorted_order_.size()-1; i++){ //checking if i is same as
+        for (unsigned int j=i+1; j<sorted_order_.size();j++){ //every next one on the list
+            if(i==j){
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 // Find whether a certain value appears in a given range of the chromosome.
 // Returns true if value is within the specified the range specified
 // [begin, end) and false otherwise.
-bool
-Chromosome::is_in_range(unsigned value, unsigned begin, unsigned end) const
+bool Chromosome::is_in_range(unsigned value, unsigned begin, unsigned end) const //NOLINT (making clang-tidy shut up about making this function static; per instructions Eitan hasn't allowed us to modify what was given in header file.
 {
-    // Add your implementation here
+    for (unsigned int i = begin; i<end; i++){
+        if (value == i){
+            return true;
+        }
+    }
+    return false;
 }
