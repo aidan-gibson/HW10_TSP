@@ -19,6 +19,8 @@ chromosomes are represented as `permutation_t` types
 - [x] `is_valid()`checks that the my_order member actually represents a valid permutation (no repeats or gaps). tested, works.
 - [x] `is_in_range()` tested, works.
 - [x] `calculate_fitness()` 
+- [x] augment constructor and destructor as necessary
+- [x] `mutate()` pick 2 points at random and swap their values
 
 
 

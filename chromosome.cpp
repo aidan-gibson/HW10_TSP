@@ -27,12 +27,20 @@ Chromosome::~Chromosome()
 }
 
 //////////////////////////////////////////////////////////////////////////////
-// Perform a single mutation on this chromosome
-void
-Chromosome::mutate()
+/*
+ * Perform a single mutation on this chromosome
+ * pick two points at random and swap their values!
+ */
+void Chromosome::mutate()
 {
-    // Add your implementation here
+    generator_.seed(chrono::system_clock::now().time_since_epoch().count()); //using current time as seed
+    unsigned int swap_pos_a = generator_()%order_.size();
+    unsigned int swap_pos_b = generator_()%order_.size();
 
+    while (swap_pos_a == swap_pos_b){ // ensures they are diff values; if both a and b randomly get 0, no swap will occur
+        swap_pos_b = generator_()%order_.size();
+    }
+    swap(order_[swap_pos_a],order_[swap_pos_b]);
     assert(is_valid());
 }
 
@@ -53,9 +61,7 @@ pair<Chromosome*, Chromosome*> Chromosome::recombine(const Chromosome* other)
 // For an ordered set of parents, return a child using the ordered crossover.
 // The child will have the same values as p1 in the range [b,e),
 // and all the other values in the same order as in p2.
-Chromosome*
-Chromosome::create_crossover_child(const Chromosome* p1, const Chromosome* p2,
-                                   unsigned b, unsigned e) const
+Chromosome* Chromosome::create_crossover_child(const Chromosome* p1, const Chromosome* p2, unsigned b, unsigned e) const
 {
     Chromosome* child = p1->clone();
 
@@ -81,8 +87,9 @@ Chromosome::create_crossover_child(const Chromosome* p1, const Chromosome* p2,
     return child;
 }
 
-// Return a positive fitness value, with higher numbers representing
-// fitter solutions (shorter total-city traversal path).
+/*
+ * Return a positive fitness value, with higher numbers representing fitter solutions (shorter total-city traversal path).
+ */
 double Chromosome::get_fitness() const
 {
     return 1.0/calculate_total_distance();
