@@ -8,18 +8,17 @@ All build files end up in `cmake-build-debug/` (which is .gitignored), so `speed
 
 ### Chromosome Class
 
-dw about `virtual` and `protected` keywords
+dw about `virtual` and `protected` keywords, they'll be important HW11.
 
 chromosomes are represented as `permutation_t` types
 
 `chromosome.h` may add members, but not modify existing members
 
-`chromosome.cpp` only boilerplate written, write all
-
-
+`chromosome.cpp` only boilerplate written, gotta implement everything in header:
 
 - [x] `is_valid()`checks that the my_order member actually represents a valid permutation (no repeats or gaps). tested, works.
 - [x] `is_in_range()` tested, works.
+- [x] `calculate_fitness()` 
 
 
 

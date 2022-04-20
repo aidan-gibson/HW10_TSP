@@ -85,18 +85,17 @@ Chromosome::create_crossover_child(const Chromosome* p1, const Chromosome* p2,
 // fitter solutions (shorter total-city traversal path).
 double Chromosome::get_fitness() const
 {
-    return 0.0;
-    // Add your implementation here
+    return 1.0/calculate_total_distance();
 }
 
-// A chromsome is valid if it has no repeated values in its permutation,
-// as well as no indices above the range (length) of the chromosome.
+/*
+ * A chromosome is valid if it has no repeated values in its permutation, as well as no indices above the range (length) of the chromosome.
+ */
 bool Chromosome::is_valid() const
 {
     // order_ is permutation_t, like {0,1,2,3,4} (std::vector<unsigned int>)
     // no repeated values.
     // within range
-    //ultimately you're going off of a list, checking em off, and it's always 0->(range-1)
 
     //(copy the vector) then sort it (u dont wanna modify the orig perm)
     Cities::permutation_t sorted_order_;
@@ -120,11 +119,14 @@ bool Chromosome::is_valid() const
     return true;
 }
 
-// Find whether a certain value appears in a given range of the chromosome.
-// Returns true if value is within the specified the range specified
-// [begin, end) and false otherwise.
-bool Chromosome::is_in_range(unsigned value, unsigned begin, unsigned end) const //NOLINT (making clang-tidy shut up about making this function static; per instructions Eitan hasn't allowed us to modify what was given in header file.
+/* Find whether a certain value appears in a given range of the chromosome.
+ * Returns true if value is within the specified the range specified
+ * [begin, end) and false otherwise.
+ */
+bool Chromosome::is_in_range(unsigned value, unsigned begin, unsigned end) const //NOLINT
 {
+    //making clang-tidy shut up about making this function static; per instructions Eitan hasn't allowed us to modify what was given in header file.
+
     for (unsigned int i = begin; i<end; i++){
         if (value == i){
             return true;
