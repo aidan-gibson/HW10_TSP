@@ -31,6 +31,7 @@ chromosomes are represented as `permutation_t` types
 - [x] Constructor: generate a completely random population of Chromosomes with pop_size individuals. 
 - [x] Destructor: clean up any resources you allocated.
 - [x] `get_best()`
+- [x] `select_parent()`
 
 
 

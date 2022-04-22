@@ -141,3 +141,28 @@ int main(int argc, char** argv)
 
     return 0;
 }
+//int main()
+//{
+//
+//
+//    const auto cities = Cities("linear.tsv");
+//    const auto pop_size = 3;
+//    const auto mut_rate = (0.1);
+//    constexpr unsigned NUM_ITER = 100000;
+//    assert(cities.size() > 0 && "Did you actually read the input file successfully?");
+//
+//
+////  const auto best_ordering = exhaustive_search(cities);
+////  const auto best_ordering = randomized_search(cities, NUM_ITER);
+//    const auto best_ordering = ga_search(cities, NUM_ITER, pop_size, mut_rate);
+//
+//    auto out = std::ofstream("shortest.tsv");
+//    if (!out.is_open()) {
+//        std::cerr << "Can't open output file to record shortest path!\n";
+//        return -2;
+//    }
+//
+//    out << cities.reorder(best_ordering);
+//
+//    return 0;
+//}
