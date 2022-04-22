@@ -21,8 +21,7 @@ chromosomes are represented as `permutation_t` types
 - [x] `calculate_fitness()` 
 - [x] augment constructor and destructor as necessary
 - [x] `mutate()` pick 2 points at random and swap their values
-- [x] `recombine()` 
-- [ ] recombine allocates memory for new offspring (needs to be manually cleaned?)
+- [x] `recombine()`
 
 
 
