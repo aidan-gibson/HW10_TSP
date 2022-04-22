@@ -43,3 +43,7 @@ Came out clean!
 
 
 `./HW10_TSP challenge.tsv 10000 0.2`
+
+GA isn't much better than random ):
+
+![](comparison.gif)
