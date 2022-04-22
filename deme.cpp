@@ -10,13 +10,17 @@
 // Also receives a mutation rate in the range [0-1].
 Deme::Deme(const Cities* cities_ptr, unsigned pop_size, double mut_rate)
 {
-    // Add your implementation here
+    for (auto& chr:pop_){ //addr of
+        chr = new Chromosome(cities_ptr);
+    }
 }
 
 // Clean up as necessary
 Deme::~Deme()
 {
-    // Add your implementation here
+    for (auto& chr: pop_){
+        delete chr;
+    }
 }
 
 // Evolve a single generation of new chromosomes, as follows:

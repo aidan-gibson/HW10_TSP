@@ -22,13 +22,14 @@ chromosomes are represented as `permutation_t` types
 - [x] augment constructor and destructor as necessary
 - [x] `mutate()` pick 2 points at random and swap their values
 - [x] `recombine()` 
-- [ ] recombine allocates memory for new offspring
+- [ ] recombine allocates memory for new offspring (needs to be manually cleaned?)
 
 
 
+### Deme Class
 
-
-
+- [x] Constructor: generate a completely random population of Chromosomes with pop_size individuals. 
+- [x] Destructor: clean up any resources you allocated.
 
 
 

@@ -15,21 +15,23 @@
 
 class Chromosome {
     // Disable public copying of objects for polymorphism:
-    Chromosome(const Chromosome&) = delete;
-    Chromosome(Chromosome&&) = delete;
-    Chromosome& operator=(const Chromosome&) = delete;
-    Chromosome& operator=(Chromosome&&) = delete;
+    Chromosome(const Chromosome &) = delete;
+
+    Chromosome(Chromosome &&) = delete;
+
+    Chromosome &operator=(const Chromosome &) = delete;
+
+    Chromosome &operator=(Chromosome &&) = delete;
 
 public:
     // Creation method for new Chromosome. Saves a copy of the cities and
     // generates a completely random permutation from a list of cities.
-    Chromosome(const Cities*);
+    Chromosome(const Cities *);
 
     // Polymorphic creation method from an existing Chromosome.
     // This method allocates memory for the newly created chromosome.
     // It is the caller's responsibility to free this memory.
-    virtual Chromosome* clone() const
-    {
+    virtual Chromosome *clone() const {
         return new Chromosome(cities_ptr_);
     }
 
@@ -42,12 +44,11 @@ public:
     // Return a pair of offsprings by recombining with another chromosome
     // Note: this method allocates memory for the new offsprings
     // It is the caller's responsibility to free this memory.
-    virtual std::pair<Chromosome*, Chromosome*>
-    recombine(const Chromosome* other);
+    virtual std::pair<Chromosome *, Chromosome *>
+    recombine(const Chromosome *other);
 
     // Compute total distance to traverse cities in ordering:
-    double calculate_total_distance() const
-    {
+    double calculate_total_distance() const {
         return cities_ptr_->total_path_distance(order_);
     }
 
@@ -56,8 +57,7 @@ public:
     virtual double get_fitness() const;
 
     // Return an immutable reference to the city ordering.
-    const Cities::permutation_t& get_ordering() const
-    {
+    const Cities::permutation_t &get_ordering() const {
         return order_;
     }
 
@@ -65,9 +65,9 @@ protected:
     // For an ordered set of parents, return a child using the ordered crossover.
     // The child will have the same values as p1 in the range [begin,end),
     // and all the other values in the same order as in p2.
-    virtual Chromosome*
-    create_crossover_child(const Chromosome* parent1,
-                           const Chromosome* parent2,
+    virtual Chromosome *
+    create_crossover_child(const Chromosome *parent1,
+                           const Chromosome *parent2,
                            unsigned begin,
                            unsigned end) const;
 
@@ -80,7 +80,7 @@ protected:
     // [begin, end) and false otherwise.
     bool is_in_range(unsigned value, unsigned begin, unsigned end) const;
 
-    const Cities* cities_ptr_; // Keep ptr to cities, no need for full copy
+    const Cities *cities_ptr_; // Keep ptr to cities, no need for full copy
     Cities::permutation_t order_;  // The actual permutation of this chromosome
     std::default_random_engine generator_; // A random number generator for the various methods
 };
