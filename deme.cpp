@@ -5,6 +5,7 @@
 
 #include "chromosome.h"
 #include "deme.h"
+#include <chrono> //for linux compat
 
 using namespace std;
 

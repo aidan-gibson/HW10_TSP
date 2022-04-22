@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cassert>
 #include <random>
+#include <chrono> //for linux compat
 
 #include "chromosome.h"
 
