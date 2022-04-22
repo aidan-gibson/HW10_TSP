@@ -37,4 +37,9 @@ chromosomes are represented as `permutation_t` types
 
 
 
-- [ ] Valgrind
+- [X] Valgrind
+  `/usr/bin/valgrind --tool=memcheck --xml=yes --xml-file=/tmp/clion-valgrind433dab77-8a68-4a35-9dd9-cd66df30bb3e/valgrind_output_%p --gen-suppressions=all --leak-check=full --show-leak-kinds=all --leak-resolution=high --show-reachable=yes --track-origins=yes --vgdb=no /home/parallels/CLionProjects/HW10_TSP/cmake-build-debug/HW10_TSP`
+Came out clean!
+
+
+`./HW10_TSP challenge.tsv 10000 0.2`
